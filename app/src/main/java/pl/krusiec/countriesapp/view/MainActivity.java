@@ -1,6 +1,7 @@
-package pl.krusiec.countriesapp;
+package pl.krusiec.countriesapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import pl.krusiec.countriesapp.R;
 
 import android.os.Bundle;
 
