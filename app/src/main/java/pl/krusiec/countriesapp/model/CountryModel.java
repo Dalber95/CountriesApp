@@ -1,9 +1,16 @@
 package pl.krusiec.countriesapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CountryModel {
-    String countryName;
-    String capital;
-    String flag;
+    @SerializedName("name")
+    private String countryName;
+
+    @SerializedName("capital")
+    private String capital;
+
+    @SerializedName("flagPNG")
+    private String flag;
 
     public CountryModel(String countryName, String capital, String flag) {
         this.countryName = countryName;
