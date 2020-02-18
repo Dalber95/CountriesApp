@@ -2,26 +2,20 @@ package pl.krusiec.countriesapp.model;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import pl.krusiec.countriesapp.di.DaggerApiComponent;
 
 public class CountriesService {
 
-    private static final String BASE_URL = "https://raw.githubusercontent.com";
-
     private static CountriesService instance;
 
-    private CountriesApi api = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(CountriesApi.class);
+    @Inject
+    public CountriesApi api;
 
-    private CountriesService() {
-
+    public CountriesService() {
+        DaggerApiComponent.create().inject(this);
     }
 
     public static CountriesService getInstance() {

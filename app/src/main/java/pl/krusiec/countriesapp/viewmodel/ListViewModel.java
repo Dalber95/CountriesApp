@@ -2,12 +2,15 @@ package pl.krusiec.countriesapp.viewmodel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import pl.krusiec.countriesapp.di.DaggerApiComponent;
 import pl.krusiec.countriesapp.model.CountriesService;
 import pl.krusiec.countriesapp.model.CountryModel;
 
@@ -17,9 +20,15 @@ public class ListViewModel extends ViewModel {
     public MutableLiveData<Boolean> countryLoadError = new MutableLiveData<>();
     public MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
-    private CountriesService countriesService = CountriesService.getInstance();
+    @Inject
+    public CountriesService countriesService;
 
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    public ListViewModel() {
+        super();
+        DaggerApiComponent.create().inject(this);
+    }
 
     public void refresh() {
         fetchCountries();
